@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<title>Web-site</title>
 	<link rel="stylesheet" href="style.css">
+	<script type="text/javascript" src="jquery.js"></script>
 </head>
 <body>
 	<div class="wrapper">
@@ -13,23 +14,75 @@
 				<ul>
 					<li><u><a href="register.html" title="Регистрация">Регистрация</a></u></li>
 					<li><u><a href="autor.html" title="Авторизация">Авторизация</a></u></li>
-					<li><u><a href="photogallery.html" title="Фотогаллерея">Фотогаллерея</a></u></li>
-					<li><u><a href="future.html" title="Планы на будущее">Планы на будущее</a></u></li>
+					<li><u><a href="photogallery.html" title="Фотогаллерея">Фотогалерея</a></u></li>
+					<li><u><a href="future.html" title="Планы на будущее">Цели и планы</a></u></li>
 					<li><u><a href="history.html" title="История жизни">История жизни</a></u></li>
 				</ul>
 			</nav>
 			<div class="line">
 			<img src="img/line-up.png" width="1000px" height="5px">
-			<div>
+			</div>
 		</header>
 		
 		<!-- MIDDLE-1 BEGIN-->
 		<div class="third-block">
-			<h2>Фотогаллерея</h2>
-			<div class="kvadrat">
-				<img src="img/kvadrat.png" width="550px">
+			<h2>Фотогалерея</h2>
+			<br>
+			<div id="gallery">
+				<div id="panel">
+					<img id="largeImage" src="images/image_01_large.jpg" />
+				</div>
+				<div id="thumbs">
+					<img src="images/image_01_thumb.jpg" id="img1" value="1"  style="border: 2px solid black;" />
+					<img src="images/image_02_thumb.jpg" id="img2" value="2"/>
+					<img src="images/image_03_thumb.jpg" id="img3" value="3"/>
+					<img src="images/image_04_thumb.jpg" id="img4" value="4"/>
+					<img src="images/image_05_thumb.jpg" id="img5" value="5"/>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<button id="back"></button>
+					<img src="images/image_06_thumb.jpg" id="img6" value="6"/>
+					<button id="forward"></button>
+				</div>
 			</div>
+		<br>
 		</div>
+			<script>
+			$currindex = 1;
+			$('#thumbs').delegate('img','click', function(){
+				$('#img'+$currindex).attr('style', '');
+				$('#largeImage').attr('src',$(this).attr('src').replace('thumb','large'));
+				$currindex = $(this).attr('value');
+				$('#img'+$currindex).attr('style', 'border: 2px solid black;');
+			});
+			$('#gallery').delegate('#forward','click', function(){
+				$('#img'+$currindex).attr('style', '');
+				$str1 = ""+$currindex+"";
+				$currindex++;
+				if ($currindex > 6) {
+					$currindex = 1;
+				}
+				$str2 = ""+$currindex+"";
+				$('#largeImage').attr('src',$('#largeImage').attr('src').replace($str1,$str2));
+				$('#img'+$currindex).attr('style', 'border: 2px solid black;');
+			});
+			$('#gallery').delegate('#back','click', function(){
+				$('#img'+$currindex).attr('style', '');
+				$str1 = ""+$currindex+"";
+				$currindex--;
+				if ($currindex < 1) {
+					$currindex = 6;
+				}
+				$str2 = ""+$currindex+"";
+				$('#largeImage').attr('src',$('#largeImage').attr('src').replace($str1,$str2));
+				$('#img'+$currindex).attr('style', 'border: 2px solid black;');
+			});
+			</script>
 		<!-- MIDDLE-1 END-->
 		
 		<!--FOOTER BEGIN-->
@@ -40,7 +93,7 @@
 				</div>
 				<ul class="icon">
 					<li><a href="#" class="sk"><img src="img/skype.png" ></a></li>
-					<li><a href="#" class="vk"><img src="img/vk.png" ></a></li>
+					<li><a href="http:\\vk.com" class="vk"><img src="img/vk.png" ></a></li>
 					<li><a href="#" class="m"><img src="img/mail.png" ></a></li>
 				</ul>
 			</div>
